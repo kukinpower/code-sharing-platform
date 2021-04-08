@@ -2,7 +2,6 @@ package platform.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -12,18 +11,6 @@ import java.time.format.DateTimeFormatter;
 
 public class CodeSnippet implements Comparable<CodeSnippet> {
 
-  private static final String HTML_FORMAT = "<html>\n"
-      + "<head>\n"
-      + "    <title>Code</title>\n"
-      + "</head>\n"
-      + "<body>\n"
-      + "<span id=\"load_date\"> %s </span>"
-      + "    <pre id=\"code_snippet\">\n"
-      + "%s"
-      + "</pre>\n"
-      + "</body>\n"
-      + "</html>";
-
   private final static String DATE_PATTERN = "yyyy/MM/dd HH:mm:ss";
 
   private String code;
@@ -31,11 +18,6 @@ public class CodeSnippet implements Comparable<CodeSnippet> {
 
   public CodeSnippet() {
     this.date = LocalDateTime.now();
-  }
-
-  public CodeSnippet(String code, LocalDateTime date) {
-    this.code = code;
-    this.date = date;
   }
 
   @JsonGetter
@@ -63,11 +45,6 @@ public class CodeSnippet implements Comparable<CodeSnippet> {
   @JsonSetter
   public void setDate(LocalDateTime date) {
     this.date = date;
-  }
-
-  @JsonIgnore
-  public String codeHTML() {
-    return String.format(HTML_FORMAT, date.format(DateTimeFormatter.ofPattern(DATE_PATTERN)), code);
   }
 
   @Override

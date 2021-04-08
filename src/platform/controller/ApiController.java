@@ -1,6 +1,5 @@
 package platform.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.validation.constraints.Max;
@@ -39,7 +38,8 @@ public class ApiController {
 
   @GetMapping(value = "/api/code/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public ResponseEntity<CodeSnippet> codeJSON(@PathVariable @Min(1) @Max(Integer.MAX_VALUE) Integer id) {
+  public ResponseEntity<CodeSnippet> codeJSON(
+      @PathVariable @Min(1) @Max(Integer.MAX_VALUE) Integer id) {
     return ResponseEntity.ok(service.get(id));
   }
 
