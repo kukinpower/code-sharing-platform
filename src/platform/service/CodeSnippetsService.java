@@ -20,6 +20,9 @@ public class CodeSnippetsService {
   }
 
   public CodeSnippet get(int id) {
+    if (codeSnippets.size() <= id) {
+      return new CodeSnippet();
+    }
     return codeSnippets.get(id - 1);
   }
 
