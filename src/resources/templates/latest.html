@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+  <title>Latest</title>
+</head>
+<body th:each="codeSnippet : ${codeSnippets}">
+  <pre id="code_snippet" th:text="${codeSnippet.code()}"></pre>
+  <span id="load_date" th:text="${codeSnippet.dateFormat()}">No code snippets</span>
+</body>
+</html>
