@@ -20,7 +20,7 @@ public class CodeSnippetsService {
     codeSnippets = new ArrayList<>();
   }
 
-  public CodeSnippet get(int id) {
+  public CodeSnippet snippetById(int id) {
     if (id == 0) {
       throw new IndexOutOfBoundsException();
     } else if (codeSnippets.size() <= id) {
@@ -29,12 +29,12 @@ public class CodeSnippetsService {
     return codeSnippets.get(id - 1);
   }
 
-  public String add(CodeSnippet codeSnippet) {
+  public String addNewSnippet(CodeSnippet codeSnippet) {
     codeSnippets.add(codeSnippet);
     return String.valueOf(codeSnippets.size());
   }
 
-  public List<CodeSnippet> latest() {
+  public List<CodeSnippet> tenLatestSnippetsList() {
     if (codeSnippets.isEmpty()) {
       return Collections.emptyList();
     }

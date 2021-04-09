@@ -27,22 +27,22 @@ public class ApiController {
   }
 
   @PostMapping(path = "/new")
-  public ResponseEntity<String> newCodeSnippet(@RequestBody CodeSnippet codeSnippet) {
+  public ResponseEntity<String> createNewSnippet(@RequestBody CodeSnippet codeSnippet) {
 
     return ResponseEntity.ok().header("Content-type",
-        "application/json").body("{ \"id\" : \"" + service.add(codeSnippet) + "\" }");
+        "application/json").body("{ \"id\" : \"" + service.addNewSnippet(codeSnippet) + "\" }");
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public ResponseEntity<CodeSnippet> getCodeSnippedJSON(@PathVariable("id") Integer id) {
-    return ResponseEntity.ok(service.get(id));
+  public ResponseEntity<CodeSnippet> snippetJsonById(@PathVariable("id") Integer id) {
+    return ResponseEntity.ok(service.snippetById(id));
   }
 
   @GetMapping(value = "/latest", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public ResponseEntity<List<CodeSnippet>> latestJSON() {
-    return ResponseEntity.ok(service.latest());
+  public ResponseEntity<List<CodeSnippet>> tenLatestSnippetsJsonList() {
+    return ResponseEntity.ok(service.tenLatestSnippetsList());
   }
 
 }

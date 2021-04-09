@@ -23,29 +23,29 @@ public class WebController {
 
   @GetMapping(path = "/new", produces = MediaType.TEXT_HTML_VALUE)
   @ResponseBody
-  public ModelAndView newCodeHTML() {
+  public ModelAndView showCreateSnippetHtmlForm() {
     return new ModelAndView("new");
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.TEXT_HTML_VALUE)
   @ResponseBody
-  public ModelAndView codeHTML(@PathVariable("id") Integer id) {
+  public ModelAndView snippetByIdHtmlPage(@PathVariable("id") Integer id) {
 
     ModelAndView model = new ModelAndView("code");
 
-    model.addObject("code", service.get(id).code());
-    model.addObject("date", service.get(id).dateFormat());
+    model.addObject("code", service.snippetById(id).code());
+    model.addObject("date", service.snippetById(id).dateFormat());
 
     return model;
   }
 
   @GetMapping(path = "/latest", produces = MediaType.TEXT_HTML_VALUE)
   @ResponseBody
-  public ModelAndView latestHTML() {
+  public ModelAndView tenLatestSnippetsListHtmlPage() {
 
     ModelAndView model = new ModelAndView("latest");
 
-    model.addObject("codeSnippets", service.latest());
+    model.addObject("codeSnippets", service.tenLatestSnippetsList());
 
     return model;
   }
