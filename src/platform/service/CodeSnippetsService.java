@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import platform.model.CodeSnippet;
 
 @Component
 public class CodeSnippetsService {
+
+  public final static String DATE_PATTERN = "yyyy/MM/dd HH:mm:ss";
 
   private final List<CodeSnippet> codeSnippets;
 
@@ -19,15 +21,17 @@ public class CodeSnippetsService {
   }
 
   public CodeSnippet get(int id) {
-    if (codeSnippets.size() <= id) {
-      return new CodeSnippet();
+    if (id == 0) {
+      throw new IndexOutOfBoundsException();
+    } else if (codeSnippets.size() <= id) {
+      throw new NoSuchElementException();
     }
     return codeSnippets.get(id - 1);
   }
 
-  public AtomicInteger add(CodeSnippet codeSnippet) {
+  public String add(CodeSnippet codeSnippet) {
     codeSnippets.add(codeSnippet);
-    return new AtomicInteger(codeSnippets.size());
+    return String.valueOf(codeSnippets.size());
   }
 
   public List<CodeSnippet> latest() {

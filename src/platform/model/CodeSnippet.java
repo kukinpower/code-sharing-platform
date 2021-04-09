@@ -8,10 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import platform.service.CodeSnippetsService;
 
 public class CodeSnippet implements Comparable<CodeSnippet> {
-
-  private final static String DATE_PATTERN = "yyyy/MM/dd HH:mm:ss";
 
   private String code;
   private LocalDateTime date;
@@ -32,14 +31,14 @@ public class CodeSnippet implements Comparable<CodeSnippet> {
   }
 
   @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonFormat(pattern = DATE_PATTERN)
+  @JsonFormat(pattern = CodeSnippetsService.DATE_PATTERN)
   @JsonProperty("date")
   public LocalDateTime date() {
     return date;
   }
 
   public String dateFormat() {
-    return date.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
+    return date.format(DateTimeFormatter.ofPattern(CodeSnippetsService.DATE_PATTERN));
   }
 
   @JsonSetter
@@ -51,4 +50,5 @@ public class CodeSnippet implements Comparable<CodeSnippet> {
   public int compareTo(CodeSnippet codeSnippet) {
     return this.date.compareTo(codeSnippet.date);
   }
+
 }
